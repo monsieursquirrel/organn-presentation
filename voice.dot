@@ -1,0 +1,44 @@
+digraph {
+  rankdir=LR;
+
+  subgraph cluster_voice {
+    style=filled;
+    color="0.4 0.2 1.0";
+    label="voice";
+
+    o0 [label="oscillator", shape=box];
+    o1 [label="oscillator", shape=box];
+    o2 [label="oscillator", shape=box];
+    o3 [label="oscillator", shape=box];
+    o4 [label="oscillator", shape=box];
+    o5 [label="oscillator", shape=box];
+    o6 [label="oscillator", shape=box];
+    o7 [label="oscillator", shape=box];
+    o8 [label="oscillator", shape=box];
+
+    m [label="mixer", shape=box];
+
+    a [label="amp/env", shape=box];
+
+    o0 -> m;
+    o1 -> m;
+    o2 -> m;
+    o3 -> m;
+    o4 -> m;
+    o5 -> m;
+    o6 -> m;
+    o7 -> m;
+    o8 -> m;
+
+    m -> a;
+
+    /* force a more horizontal layout */
+    { rank = same; o0; o2; o4; o6; o8 }
+    { rank = same; o1; o3; o5; o7}
+    o0 -> o1 [style=invis];
+  }
+
+  ao [style=invis];
+
+  a -> ao;
+}

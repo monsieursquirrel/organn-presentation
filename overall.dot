@@ -1,0 +1,58 @@
+digraph {
+  rankdir=LR;
+
+	subgraph cluster_midi_thread {
+		label="coremidi thread";
+    style=filled;
+    color="0.7 0.2 1.0";
+    mc [label="midi callback", shape=box];
+	}
+
+	subgraph cluster_thread_0 {
+		label="thread";
+    style=filled;
+    color="0.4 0.2 1.0";
+    
+    v0 [label="voice", shape=box];
+    v1 [label="voice", shape=box];
+
+    m0 [label="mixer", shape=box];
+
+    v0 -> m0;
+    v1 -> m0;
+	}
+
+  subgraph cluster_thread_1 {
+    label="thread";
+    style=filled;
+    color="0.4 0.2 1.0";
+
+    v2 [label="voice", shape=box];
+    v3 [label="voice", shape=box];
+
+    m1 [label="mixer", shape=box];
+
+    v2 -> m1;
+    v3 -> m1;
+  }
+
+  subgraph cluster_audio_thread {
+    label="coreaudio thread";
+
+    style=filled;
+    color="0.1 0.2 1.0";
+
+    m2 [label="mixer", shape=box];
+    ac [label="audio callback", shape=box];
+
+    m2 -> ac;
+  }
+
+  mc -> v0;
+  mc -> v1;
+  mc -> v2;
+  mc -> v3;
+
+  m0 -> m2;
+  m1 -> m2;
+}
